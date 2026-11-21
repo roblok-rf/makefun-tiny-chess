@@ -4,19 +4,6 @@
 
 # tiny-chess-01: a 4 KB Python chess engine
 
-`main.py` (4,059 bytes) is the whole engine: a 0x88-board negamax
-search with alpha-beta + PVS, a transposition table, quiescence
-search, MVV-LVA + killer + history move ordering, null-move pruning
-and late-move reductions, over a tapered middlegame/endgame
-piece-square evaluation. It searches to a fixed budget of 50,000
-nodes per move, so it is fully deterministic: no clock, no
-unseeded randomness. It talks to the make.fun env over HTTP (UCI).
+`main.py` (4,059 bytes) is the whole engine: 0x88 negamax, alpha-beta + PVS, transposition table, quiescence, MVV-LVA/killer/history ordering, null-move pruning, LMR, tapered piece-square eval. Fixed 50,000-node budget per move: deterministic, no clock, no randomness. Speaks UCI over HTTP to the make.fun env.
 
-`src.py` is the readable source `main.py` was packed from with the
-kit's `makefun compress` (LZMA payload + stub). Python 3.13
-standard library only; it reads no other file.
-
-Verified locally: perft start 20 / 400 / 8,902 / 197,281 (depths
-1-4), kiwipete 48 / 2,039 / 97,862 (depths 1-3); same position
-twice gives the same move. Practice trials ran on the kit's env
-server and scorer; see TRANSCRIPT.md for the measured Elo.
+Python 3.13 stdlib only. `python3 main.py`. Perft start 20/400/8902/197281 (depths 1-4); kiwipete 48/2039/97862 (1-3).
